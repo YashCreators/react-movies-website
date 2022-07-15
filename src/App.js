@@ -1,23 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css' ;
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+import { LogIn } from './Login/Login';
+import { Header } from './Header/Header';
+import  MoviesList  from './movies/MoviesList'
+import { MoviesDetail } from './movies/MovieDetail';
+import { WebshowList } from './Webshows/WebShowList';
+import { WebShowDetail } from './Webshows/WebShowDetails'
+import Detail from './Webshows/Season Details/Detail'
 
 function App() {
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Router>
+      <Switch>
+
+        <Route exact path='/movie/:id'>
+          <MoviesDetail />
+        </Route>
+
+        <Route exact path='/'>
+          <LogIn />
+        </Route>
+
+        <Route exact path='/movie'>
+          <Header />
+          <MoviesList />
+        </Route>
+
+        <Route exact path='/tv/:id'>
+          <WebShowDetail />
+        </Route>
+
+        <Route exact path='/tv/:id/details' component={Detail} />
+          
+        <Route exact path='/webshows'>
+          <WebshowList />
+        </Route>
+
+
+      </Switch>
+      
+    </Router>
     </div>
   );
 }
